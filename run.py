@@ -18,11 +18,11 @@ def run(lnt, t_count, t_start, t_end, log, insulated=False, init_temp=0, del_t=0
     new_t = init()
     t = results[l]
     if not insulated:
-      new_t[0] = round(t[0] - _lambda * (2 * t[1] - 2 * t[0] + 4), 4)
+      new_t[0] = round(t[0] + _lambda * (2 * t[1] - 2 * t[0] - 4), 4)
     for i in range(1, lnt - 1):
       new_t[i] = round(t[i] + _lambda * (t[i + 1] - 2 * t[i] + t[i - 1]), 4)
     if not insulated:
-      new_t[lnt - 1] = round(t[lnt - 1] - _lambda * (2 * t[lnt - 2] - 2 * t[lnt - 1] + 4), 4)
+      new_t[lnt - 1] = round(t[lnt - 1] + _lambda * (2 * t[lnt - 2] - 2 * t[lnt - 1]), 4)
     results.append(new_t)
 
   l = Log(log[0])
@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
   run(
     lnt=6,
-    t_count=0.5,
+    t_count=5,
     t_start=50,
     t_end=50,
     log=['open', 'Open'],
